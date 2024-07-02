@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './playlist_shuffler.dart';
 import '../settings/settings_view.dart';
+import './counter.dart';
 
 /// Displays detailed information about a SampleItem.
 class HomeView extends StatelessWidget {
@@ -38,6 +39,22 @@ class HomeView extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) =>
                               PlaylistShuffler(key: UniqueKey()),
+                        ));
+                  },
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Literally just a counter'),
+                ElevatedButton(
+                  child: const Text('Go'),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Counter(key: UniqueKey()),
                         ));
                   },
                 ),

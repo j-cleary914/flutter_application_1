@@ -3,6 +3,7 @@ import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 import 'screens/home_view.dart';
 import 'screens/playlist_shuffler.dart';
+import 'screens/counter.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => const HomeView(),
             '/playlistShuffler': (context) => const PlaylistShuffler(),
+            '/counter': (context) => const Counter(),
             '/settings': (context) =>
                 SettingsView(controller: settingsController),
           },
