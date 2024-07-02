@@ -16,6 +16,12 @@ class _CounterState extends State<Counter> {
     });
   }
 
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +35,10 @@ class _CounterState extends State<Counter> {
             ElevatedButton(
               onPressed: _incrementCounter,
               child: const Text("press to count"),
+            ),
+            ElevatedButton(
+              onPressed: _resetCounter,
+              child: const Text("reset counter"),
             ),
           ],
         ),
