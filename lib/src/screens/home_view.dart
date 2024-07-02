@@ -16,7 +16,6 @@ class HomeView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              // print(SettingsView.routeName);
               Navigator.restorablePushNamed(context, SettingsView.routeName);
             },
           ),
