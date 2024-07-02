@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
-class Counter extends StatelessWidget {
+class Counter extends StatefulWidget {
   const Counter({super.key});
+
+  @override
+  _CounterState createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +25,10 @@ class Counter extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            const Text('pressed 0 times'),
+            Text('pressed $_counter times'),
             ElevatedButton(
+              onPressed: _incrementCounter,
               child: const Text("press to count"),
-              onPressed: () async {
-                print('incremenet...');
-              },
             ),
           ],
         ),
