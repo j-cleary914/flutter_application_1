@@ -3,7 +3,6 @@ import './playlist_shuffler.dart';
 import '../settings/settings_view.dart';
 import './counter.dart';
 
-/// Displays detailed information about a SampleItem.
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
@@ -32,7 +31,6 @@ class HomeView extends StatelessWidget {
                 ElevatedButton(
                   child: const Text('Go'),
                   onPressed: () {
-                    print('press yo');
                     Navigator.push(
                         context,
                         MaterialPageRoute(

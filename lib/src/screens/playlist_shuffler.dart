@@ -2,57 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../secrets.dart';
+import '../util/fetch.dart';
 
-/*
-class Album {
-  final int userId;
-  final int id;
-  final String title;
+const myUserId = '1zy4qczx6za7vjt9lh5cram7u';
 
-  const Album({
-    required this.userId,
-    required this.id,
-    required this.title,
-  });
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        'userId': int userId,
-        'id': int id,
-        'title': String title,
-      } =>
-        Album(
-          userId: userId,
-          id: id,
-          title: title,
-        ),
-      _ => throw const FormatException('Failed to load album.'),
-    };
-  }
-}
-
-  Future<Album> fetchAlbum() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      Album album =
-          Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-      print(album.userId);
-      print(album.id);
-      print(album.title);
-      return album;
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load album');
-    }
-  }
-
-  */
 class PlaylistShuffler extends StatefulWidget {
   const PlaylistShuffler({super.key});
 
@@ -73,10 +26,30 @@ class _PlaylistShuffler extends State<PlaylistShuffler> {
     push to new playlist
 
     extension tasks
-    actually make a metronome lmao'
+    actually make a metronome lmao
 
   */
   String _accessToken = '';
+
+  void _fetchMyPlaylists(token) async {
+    final response = await basicFetch(
+        url: 'https://api.spotify.com/v1/users/$myUserId/playlists',
+        method: 'GET',
+        headers: {'Authorization': 'Bearer $token'});
+
+    print(response);
+  }
+
+  void _fetchMyProfile(token) async {
+    final response = await basicFetch(
+        url: 'https://api.spotify.com/v1/users/$myUserId',
+        method: 'GET',
+        headers: {'Authorization': 'Bearer $token'});
+
+    print(response);
+  }
+
+  //1zy4qczx6za7vjt9lh5cram7u
 
   void _fetchAccessToken() async {
     final response = await http.post(
@@ -128,7 +101,19 @@ class _PlaylistShuffler extends State<PlaylistShuffler> {
                 print(_accessToken);
               },
             ),
-            const Text('show the playlists?'),
+            ElevatedButton(
+              child: const Text("fetch my profile"),
+              onPressed: () async {
+                // _fetchMyPlaylists(_accessToken);
+                _fetchMyProfile(_accessToken);
+              },
+            ),
+            ElevatedButton(
+              child: const Text("fetch my playlists??"),
+              onPressed: () async {
+                _fetchMyPlaylists(_accessToken);
+              },
+            ),
           ],
         ),
       ),
